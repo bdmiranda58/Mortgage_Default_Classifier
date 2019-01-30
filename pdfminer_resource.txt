@@ -1,0 +1,1 @@
+https://www.blog.pythonlibrary.org/2018/05/03/exporting-data-from-pdfs-with-python/
