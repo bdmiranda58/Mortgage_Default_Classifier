@@ -1,54 +1,27 @@
-# Capstone Project
+<img style="float: left;" src="./images/fanniemae.png">
+<br><br><br><br><br><br>
+______
 
-Your Capstone project is the culmination of your time at GA. You will be tasked with developing an interesting question, collecting the data required to model that data, developing the strongest model (or models) for prediction, and communicating those findings to other data scientists and non-technical individuals. This introductory document lays out the five consitutent portions of the project and their due dates.
+# Mortgage Loan Default Classifier  
+____________  
+____________  
 
-## Your Deliverables
+## Problem Statement    
+_____________  
+Fannie Mae, or more specifically the Federal National Mortgage Association (FNMA), is a government sponsored entity whose primary goal is to raise home ownership and affordable housing levels.  Fannie Mae attempts to accomplish this in essence by purchasing mortgage loans within certain parameters from mortgage lenders.  In turn, mortgage lenders are provided cash flow to issue additional mortgages.  
 
-- A well-made predictive model using either structured or unstructured machine learning techniques (or other technique approved in advanced by the global instructors), as well as clean, well-written code. 
-- A technical report aimed at fellow data scientists that explains your process and findings
-- A public presentation of your findings aimed at laypeople. 
+The cause of the Financial Crisis of 2008 can in part be drawn back to the purchase of mortgage loans with an actual probability of default that were higher than assumed.  By creating a classification model that will predict whether a mortgage loan will default based on pre-purchase characteristics, Fannie Mae may better avoid high risk mortgage loans.  The model will be evaluated based on Accuracy and False Negative Rate.  In this particular case, the "positive" class will be loans that default therefore, we will seek to minimize the False Negative Rate while maximizing Accuracy.  
 
-### **[Capstone, Part 1: Topic Proposals](./part_01/)**
+## Data  
+_________  
+Fannie Mae provides 2 options in regards to the data available for download; the entire dataset or subsets per quarter of loan acquisition. The entire dataset encompasses approximately 26 GB of data in comparison to approximately 200 - 500 MB for quarter subsets. The quarter subsets on average contain greater than 200,000 observations which will be sufficient for the scope of this project as the projects current scope seeks predict loan default using the acquisition data.  
 
-In Part 1, get started by choosing **three potential topics and problems**, describing your goals & criteria for success, potential audience(s), and identifying 1-2 potential datasets. In the field of data science, good projects are practical. Your capstone project should be manageable and affect a real world audience. This might be a domain you are familiar with, a particular interest you have, something that affects a community you are involved in, or an area that relates to a field you wish to work in.
+The Acquisition file contains static loan characteristics for each loan acquired in the given quarter. In contrast, the Performance file contains the monthly performance such as payment history, loan balance, and final disposition through the entire life cycle of each loan acquired in the associated quarter. Since the intent of the model is to predict loan default before acquisition by Fannie Mae, the model will concentrate on the features from the Acquisition file while only extracting the loan disposition from the Performance file.  
 
-One of the best ways to test ideas quickly is to share them with others. A good data scientist has to be comfortable discussing ideas and presenting to audiences. That's why for Part 1 of your Capstone project, you'll be preparing a lightning talk in addition to your initial notebook outlining the scope of your project.  You will present your candidate topics in a slide deck, and should be prepared to answer questions and defend your data selection(s). Presentations should take no more than 3-5 minutes.
+## Model  
+_________  
+In order to render a better accuracy and false negative rate interaction features and a neural network will be introduced. Correlation between continuous features and whether a loan default were minimal. By using PolynomialFeatures, the model can investgate whether the interaction between these features are of more importance than the feature alone. Additional, a neural network wil be introduced to increase accuracy and decrease the false negative rate. A logistic regressor has an advantage of being able to indentify key features that have the greatest influence in determining whether a loan will default. However, as evidenced by the base model, it may not be able to reach the accuracy needed to be a successful model. A neural network does not have the interpretability inherent in the logistic model however, it has been shown to highly accurate because of their ability to generalise and respond to unexpected patterns. The high degree of inaction between features in this dataset may make a neural network the right choice in this situation.
 
-**The ultimate choice of topic for your capstone project is yours!** However, this is research and development work. Sometimes projects that look easy can be difficult and vice versa. It never hurts to have a second (or third) option available.
-
-- **Goal**: Prepare a 3-5 minute lightning talk that covers three potential topics, including potential sources of data, goals, metrics and audience.
-- **Due**: Jan 2, 2019
-
-### **[Capstone, Part 2: Problem Statement + EDA](./part_02/)**
-
-For Part 2, provide a clear statement of the problem that you have chosen and an overview of your approach to solving that problem. Summarize your objectives, goals & success metrics, and any risks & assumptions. Outline your proposed methods and models, perform your initial EDA, and summarize the process. **Your data should be in hand by this point in the process!**
-
-**Again, your data should be in hand by this point the process!**
-
-- **Goal**: Describe your proposed approach and summarize your initial EDA in a code submission to your local instructor ([submission link (LINK TBD)](#))
-- **Due**: Jan 16, 2019
-
-### **[Capstone, Part 3: Progress Report + Preliminary Findings](./part_03/)**
-
-In Part 3, you'll create a progress report of your work in order to get feedback along the way. Describe your approach, initial results, and any setbacks or lessons learned so far. Your report should include updated visual and statistical analysis of your data. You’ll also meet with your local instructional team to get feedback on your results so far!
-
-- **Goal**: Discuss progress and setbacks, include visual and statistical analysis, review with instructor. [Submit your progress update on this form (LINK TBD).](#)
-- **Due**: Jan 30, 2019
-
-### **[Capstone, Part 4: Report Writeup + Technical Analysis](./part_04/)**
-
-By now, you're ready to apply your modeling skills to make machine learning predictions. Your goal for Part 4 is to develop a technical document (in the form of Jupyter notebook) that can be shared among your peers.
-
-Document your research and analysis including a summary, an explanation of your modeling approach as well as the strengths and weaknesses of any variables in the process. You should provide insight into your analysis, using best practices like cross validation or applicable prediction metrics.
-
-- **Goal**: Detailed report and code with a summary of your statistical analysis, model, and evaluation metrics.
-- **Due**: Feb 7, 2019
-
-### **[Capstone, Part 5: Presentation + Recommendations](./part_05/)**
-
-Whether during an interview or as part of a job, you will frequently have to present your findings to business partners and other interested parties - many of whom won't know anything about data science! That's why for Part 5, you'll create a presentation of your previous findings with a non-technical audience in mind.
-
-You should already have the analytical work complete, so now it's time to clean up and clarify your findings. Come up with a detailed slide deck or interactive demo that explains your data, visualizes your model, describes your approach, articulates strengths and weaknesses, and presents specific recommendations. Be prepared to explain and defend your model to an inquisitive audience!
-
-- **Goal**: Detailed presentation deck that relates your data, model, and findings to a non-technical audience.
-- **Due**: Feb 12, 2019
+## Conclusion  
+_________  
+The neural network model with an adjusted threshold of 0.10 is able to obtain 0.90 accuracy and a false negative rate of 0.074% which far surpasses the benchmark of 0.309%. For reference, Fannie Mae would be able to avoid 235 defaulted loans using this model. Using an average of $50,000 loss per default, this would equate to a loss avoidance of \$11,750,000 per 100,000 loans.
