@@ -1,6 +1,6 @@
 <img style="float: left;" src="./images/fanniemae.png">
 <br><br><br><br><br><br>
- ____________  
+
 # Mortgage Loan Default Classifier  
 ____________  
 ____________  
